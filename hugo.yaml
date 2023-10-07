@@ -1,0 +1,9 @@
+# The absolute URL (protocol, host, path, and trailing slash) of your published site
+baseURL: https://example.org/
+# A language tag as defined by RFC 5646.
+languageCode: en-us
+# Site title.
+# title: 'My New Hugo Site'
+title: Sky's Blog
+# theme
+theme: PaperMod
