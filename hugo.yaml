@@ -16,17 +16,42 @@ enableRobotsTXT: true
 # 中日韩文字检测
 hasCJKLanguage: true
 
+taxonomies:
+  category: categories
+  tag: tags
+  series: series
+
 menu:
   main:
     - identifier: archives
-      name: archives
+      name: Archives
       url: /archives/
       weight: 10
     - identifier: categories
-      name: categories
+      name: Categories
       url: /categories/
       weight: 20
     - identifier: tags
-      name: tags
+      name: Tags
       url: /tags/
       weight: 30
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 40
+
+params:
+  # env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  homeInfoParams:
+    Title: Hi there wave
+    Content: Can be Info, links, about...
+
+  socialIcons: # optional
+    - name: github
+      url: https://github.com/SkyKoo
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # is necessary
