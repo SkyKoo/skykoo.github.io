@@ -1,9 +1,32 @@
 # The absolute URL (protocol, host, path, and trailing slash) of your published site
-baseURL: https://example.org/
+baseURL: https://skykoo.github.io/
 # A language tag as defined by RFC 5646.
 languageCode: en-us
 # Site title.
-# title: 'My New Hugo Site'
 title: Sky's Blog
 # theme
 theme: PaperMod
+
+# 允许使用 Emoji 表情，建议 true
+enableEmoji: true
+# 允许内联短码
+enableInlineShortcodes: true
+# 允许爬虫抓取到搜索引擎，建议 true
+enableRobotsTXT: true
+# 中日韩文字检测
+hasCJKLanguage: true
+
+menu:
+  main:
+    - identifier: archives
+      name: archives
+      url: /archives/
+      weight: 10
+    - identifier: categories
+      name: categories
+      url: /categories/
+      weight: 20
+    - identifier: tags
+      name: tags
+      url: /tags/
+      weight: 30
