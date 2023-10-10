@@ -1,2 +1,0 @@
-# skykoo.github.io
-Blog
