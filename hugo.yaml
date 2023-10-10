@@ -42,6 +42,8 @@ menu:
 
 params:
   # env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  # ShowShareButtons: true # share button
+  ShowToc: true # Toc means table of content.
   homeInfoParams:
     Title: Hi there wave
     Content: Can be Info, links, about...
