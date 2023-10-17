@@ -1,7 +1,7 @@
 ---
 title: '如何做决定？'
 date: 2023-10-10T14:22:51+08:00
-draft: true
+draft: false
 tags: ["方法论"]
 categories: ["思考"]
 ---
