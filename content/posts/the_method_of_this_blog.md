@@ -7,7 +7,7 @@ draft = false
 直到最近看到这篇文章[Every person on the planet should have their own website](https://eftegarie.com/every-person-on-the-planet-should-have-their-own-website)，决定重启个人 blog。  
 有必要分享一下这篇短文：
 > Every person on the planet should have their own website, on their own domain name, and blog about whatever they want.  
-这个星球上的每一个人都应该有他自己的网站，他自己的域名，和任何他需要的博客。
+这个星球上的每一个人都应该有他自己的网站，他自己的域名，写他想写的博客。
 
 > I’ve had my own website since I was 13. I will not tell you the domain name because it contained some cringe ass shit that’s still visible on archive.org. But that’s not the point, at least I was playing around, unrestricted. I registered a domain name with shared hosting.  
 当我13岁时，我有了自己的网站。我不会告诉你域名，因为它包含一些在 archive.org 上仍然可见的畏缩的混蛋。但是那不重要，至少我曾经在那不受限制的折腾过。我用共享主机注册了一个域名。
