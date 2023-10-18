@@ -26,3 +26,11 @@ draft = false
 
 > Now imagine if you had access to interesting details about your great-grandmother’s sister, or brother, or whatever. Wouldn’t you want to, at least for once, look into, and share the highlights with your family?  
 现在想象一下，如果你能获得有关你曾祖母的姐妹或者兄弟或其他什么的人有趣细节。难道你不想研究一下，并与你的家人们分享其中的亮点吗？
+
+我觉得这篇文章说的非常有道理，许多事情不记录下来真的很有可能就忘了，而经历难道不是人生中最重要的东西之一吗？  
+
+并且，有的人说，演讲和写作是最值得投资的两项技能，如果这两项掌握的好，至少不会饿死，也不无道理。虽然我现在的写作水平很烂，但是没关系，这是我的 blog。  
+
+说到这，拥有个人 blog 的另一个好处是，你写的东西不会因为其他平台的限制而被屏蔽，打了很多字但是发不出去的感觉相信很多人都体会过。  
+
+所以，本博客会记录任何我想写的东西，以及现在的网站还缺少很多功能，包括最想加入的评论功能等等，后续也会慢慢完善。
