@@ -1,11 +1,11 @@
----
-title: Markdown 基本语法
-date: 2023-10-07T14:22:08+08:00
++++
+title = 'Markdown 基本语法'
+date = 2023-10-07T14:22:08+08:00
 # draft: true
 # tags: ["Markdown"]
 # categories: ["Blog"]
 # searchHidden: true
----
++++
 
 > 参考 [Markdown 教程](https://markdown.com.cn/)
 

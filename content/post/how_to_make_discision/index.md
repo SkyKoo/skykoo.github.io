@@ -1,10 +1,10 @@
----
-title: "如何做决定？"
-date: 2023-10-10T14:22:51+08:00
-draft: false
-tags: ["方法论"]
-categories: ["思考"]
----
++++
+title = '如何做决定？'
+date = 2023-10-10T14:22:51+08:00
+draft = false
+tags = ["方法论"]
+categories = ["思考"]
++++
 本篇思考源自[阮一峰的这篇Blog](https://www.ruanyifeng.com/blog/2023/09/weekly-issue-272.html)，以及他引用的[原始文章](https://fs.blog/reversible-irreversible-decisions/)
 
 做决定的时候，你可以做两种决定。  
