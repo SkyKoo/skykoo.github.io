@@ -2,8 +2,10 @@
 baseURL: https://skykoo.github.io/
 # A language tag as defined by RFC 5646.
 languageCode: en-us
+# languageCode: zh-cn
 # Site title.
-title: Sky's Blog
+# title: 天空
+title: sky's blog
 # theme
 # theme: PaperMod
 theme: hugo-theme-stack
@@ -19,10 +21,27 @@ enableRobotsTXT: true
 
 # Theme i18n support
 # Available values: ar, bn, ca, de, el, en, es, fr, hu, id, it, ja, ko, nl, pt-br, th, uk, zh-cn, zh-hk, zh-tw
-DefaultContentLanguage: zh-cn
+# defaultContentLanguage: zh-cn
+defaultContentLanguage: en
 
 # 中日韩文字检测
-hasCJKLanguage: true
+# hasCJKLanguage: true
+hasCJKLanguage: false
+
+languages:
+    en:
+        languageName: English
+        title: Sky's Blog
+        weight: 1
+          # params:
+          # description: Example description
+    zh-cn:
+        languageName: 中文
+        title: 天空站
+        weight: 2
+          # params:
+          # description: 演示说明
+
 
 permalinks:
     post: /p/:slug/
@@ -59,6 +78,14 @@ params:
             enabled: true
             default: Licensed under CC BY-NC-SA 4.0
 
+    comments:
+        enabled: true
+        provider: twikoo
+        twikoo:
+            envId: https://twikoo-api-beryl-mu.vercel.app
+            region: ap-shanghai
+            # lang: zh-cn
+
     widgets:
         homepage:
             - type: search
@@ -94,30 +121,7 @@ params:
             enabled: true
 
 menu:
-    main:
-      - identifier: home
-        name: Home
-        url: /
-        weight: -100
-        params:
-          icon: home
-          newTab: false
-
-      - identifier: archives
-        name: Archives
-        url: /archives/
-        weight: -90
-        params:
-          icon: archives
-          newTab: false
-
-      - identifier: search
-        name: Search
-        url: /search/
-        weight: -70
-        params:
-          icon: search
-          newTab: false
+    main: []
 
     social:
         - identifier: github
