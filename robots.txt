@@ -1,3 +1,1 @@
 User-agent: *
-Disallow:
-Sitemap: https://skykoo.github.io/sitemap.xml

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 鸣</title><link>https://skykoo.github.io/post/</link><description>Recent content in Posts on 鸣</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 04 Nov 2023 14:25:58 +0800</lastBuildDate><atom:link href="https://skykoo.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>怎样下载 Bilibili 视频？</title><link>https://skykoo.github.io/p/%E6%80%8E%E6%A0%B7%E4%B8%8B%E8%BD%BD-bilibili-%E8%A7%86%E9%A2%91/</link><pubDate>Sat, 04 Nov 2023 14:25:58 +0800</pubDate><guid>https://skykoo.github.io/p/%E6%80%8E%E6%A0%B7%E4%B8%8B%E8%BD%BD-bilibili-%E8%A7%86%E9%A2%91/</guid><description>&lt;h1 id="第一步安装-bilibili-macos-客户端">第一步：安装 Bilibili Macos 客户端&lt;/h1>
+&lt;p>在设置页面可以找到下载设置，缓存目录，设置好这个目录，并找到想要下载的视频，缓存下来。&lt;/p>
+&lt;p>这里需要说明的是，Bilibili 缓存好的视频是分成&lt;strong>音频&lt;/strong>和&lt;strong>视频&lt;/strong>两个 .m4s 格式的文件，所以我们需要将其整合成一个文件，并且最好转换成常用的 .mp4 格式。&lt;/p>
+&lt;h1 id="第二步安装-ffmpeg">第二步：安装 FFMPEG&lt;/h1>
+&lt;p>Macos 系统可以使用 brew 安装 FFMPEG，命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">brew install ffmpeg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="第三步准备转换脚本">第三步：准备转换脚本&lt;/h1>
+&lt;p>将以下脚本内容保存成 .sh 格式文件, 例如 convert.shell&lt;/p>
+&lt;p>需要说明的是，Bilibili 缓存的音频和视频文件都在文件的开头插入了 “000000000” 这个 9 个 0，这会导致文件不可播放，所以我们需要将其去掉，脚本中使用了 sed 命令做了处理。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># find the bilibili download video path, which can be found in bilibili settings.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># then copy this script into the path&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># usage:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># ./merge_bilibili_video.sh v1.m4s v2.m4s output.mp4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Before exec ffmpeg command, need to modify bilibili video file content:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 1. open the video file like v1.m4s with nvim or some other editors&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 2. delete the &amp;#34;00000000&amp;#34; charactors at the beginning of the file&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 3. save the modified content&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># we do it with the 3 lines code below&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">LC_ALL&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;C&amp;#39;&lt;/span> &lt;span class="c1"># in macos, need this line&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sed &lt;span class="s1">&amp;#39;1s/^000000000//g&amp;#39;&lt;/span> &lt;span class="nv">$1&lt;/span> &amp;gt;&amp;gt; temp1.m4s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sed &lt;span class="s1">&amp;#39;1s/^000000000//g&amp;#39;&lt;/span> &lt;span class="nv">$2&lt;/span> &amp;gt;&amp;gt; temp2.m4s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># use brew to install ffmpeg, if you have not installed it yet, command: brew install ffmpeg&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ffmpeg -y -i temp1.m4s -i temp2.m4s -codec copy &lt;span class="nv">$3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># delete the temp files&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">rm -f temp1.m4s
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">rm -f temp2.m4s
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>给脚本添加可执行权限，执行命令：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">chmod +x ./convert.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="第四步执行转换脚本">第四步：执行转换脚本&lt;/h1>
+&lt;p>将写好的脚本拷贝到缓存视频的目录，找到两个 .m4s 格式的文件分别做为输入的第一个和第二个参数，第三个参数是输出的文件名。
+例如：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">./convert.sh v1.m4s v2.m4s output.mp4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>执行完毕就可以看到当前目录下生成了 ouput.mp4 文件就是转换好的视频文件。&lt;/p></description></item><item><title>为什么要创建个人 Blog ？</title><link>https://skykoo.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA-blog/</link><pubDate>Wed, 18 Oct 2023 08:50:22 +0800</pubDate><guid>https://skykoo.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA-blog/</guid><description>&lt;p>其实很多年前就折腾过个人 Blog，当时是用流行的 Hexo 构建，但是后来完全没有写文章的欲望，也不知道要写啥，渐渐的就废弃掉了。&lt;br>
+直到最近看到这篇文章&lt;a class="link" href="https://eftegarie.com/every-person-on-the-planet-should-have-their-own-website" target="_blank" rel="noopener"
+>Every person on the planet should have their own website&lt;/a>，决定重启个人 blog。&lt;br>
+有必要分享一下这篇短文：&lt;/p>
+&lt;blockquote>
+&lt;p>Every person on the planet should have their own website, on their own domain name, and blog about whatever they want.&lt;br>
+这个星球上的每一个人都应该有他自己的网站，他自己的域名，写他想写的博客。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>I’ve had my own website since I was 13. I will not tell you the domain name because it contained some cringe ass shit that’s still visible on archive.org. But that’s not the point, at least I was playing around, unrestricted. I registered a domain name with shared hosting.&lt;br>
+当我13岁时，我有了自己的网站。我不会告诉你域名，因为它包含一些在 archive.org 上仍然可见的畏缩的混蛋。但是那不重要，至少我曾经在那不受限制的折腾过。我用共享主机注册了一个域名。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Everyone should be writing in public. It may be about work, family, a lifelong obsession with a certain subject, random observations, photo albums, music you produced, your favorite quotes, etc.&lt;br>
+每个人都应该进行公开写作。内容可以关于工作，家庭，一个痴迷终身的主题，随机观察，相册，你制作的音乐，你最喜欢的名言，等等。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>It will be safely kept in archive.org for your ancestors to investigate and ponder on.&lt;br>
+这些内容将被安全的保存在 archive.org 中，供你的后辈们研究和思考。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>And they will. Even if most of your future offspring are normies, at some point, it’s nearly guaranteed that someone will discover your old blog and share it with the family.&lt;br>
+它们会的。即使你未来的后代大多数时普通人，但是几乎可以保证，在某个时候，会有人发现你的旧博客，并与家人分享。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>“Hey, I have a crazy story. I found this website today. There used to be this person who did this and that. And he’s our grand-grand-grand-father!”&lt;br>
+嘿，我有一个疯狂的故事。我今天发现了这个网站。以前有个人做这做那。而他正式我们的曾曾祖父！&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Now imagine if you had access to interesting details about your great-grandmother’s sister, or brother, or whatever. Wouldn’t you want to, at least for once, look into, and share the highlights with your family?&lt;br>
+现在想象一下，如果你能获得有关你曾祖母的姐妹或者兄弟或其他什么的人有趣细节。难道你不想研究一下，并与你的家人们分享其中的亮点吗？&lt;/p>
+&lt;/blockquote>
+&lt;p>我觉得这篇文章说的非常有道理，许多事情不记录下来真的很有可能就忘了，而经历难道不是人生中最重要的东西之一吗？&lt;/p>
+&lt;p>并且，有的人说，演讲和写作是最值得投资的两项技能，如果这两项掌握的好，至少不会饿死，也不无道理。虽然我现在的写作水平很烂，但是没关系，这是我的 blog。&lt;/p>
+&lt;p>说到这，拥有个人 blog 的另一个好处是，你写的东西不会因为其他平台的限制而被屏蔽，打了很多字但是发不出去的感觉相信很多人都体会过。&lt;/p>
+&lt;p>所以，本博客会记录任何我想写的东西，以及现在的网站还缺少很多功能，包括最想加入的评论功能等等，后续也会慢慢完善。&lt;/p></description></item><item><title>如何做决定？</title><link>https://skykoo.github.io/p/%E5%A6%82%E4%BD%95%E5%81%9A%E5%86%B3%E5%AE%9A/</link><pubDate>Tue, 10 Oct 2023 14:22:51 +0800</pubDate><guid>https://skykoo.github.io/p/%E5%A6%82%E4%BD%95%E5%81%9A%E5%86%B3%E5%AE%9A/</guid><description>&lt;p>本篇思考源自&lt;a class="link" href="https://www.ruanyifeng.com/blog/2023/09/weekly-issue-272.html" target="_blank" rel="noopener"
+>阮一峰的这篇Blog&lt;/a>，以及他引用的&lt;a class="link" href="https://fs.blog/reversible-irreversible-decisions/" target="_blank" rel="noopener"
+>原始文章&lt;/a>&lt;/p>
+&lt;p>做决定的时候，你可以做两种决定。&lt;br>
+一种是&lt;strong>不可逆决定&lt;/strong>，它就像一扇单向门，你穿过了就不能回来了。&lt;br>
+另一种是&lt;strong>可逆决定&lt;/strong>，就像双向门，穿过了还可以再回来。&lt;/p>
+&lt;p>怎么区分它们呢？&lt;br>
+你可以看&lt;strong>撤销成本&lt;/strong>。撤消成本越高，决定就越不可逆；撤销成本越低，决定就越可逆。&lt;br>
+这里的窍门是，可逆决定要快，不可逆决定要晚。&lt;/p>
+&lt;p>&lt;strong>当决定是可逆的，就要快速做决定。最大的风险是拖拖拉拉、犹豫不决。&lt;/strong>&lt;br>
+&lt;strong>当决定是不可逆的，就要放慢速度，设法获取更多的决策信息。最大的风险是做出错误的决定。&lt;/strong>&lt;/p>
+&lt;p>亚马逊的老板贝佐斯认为，不可逆决定如果有70%的把握能确定结果，就是采取行动的时候。如果不那么有把握，那就不妨再观察一下。&lt;br>
+总之，可逆决定的最大风险是拖到了最后一分钟，不可逆决定的最大风险是在真正需要决策的时刻来临之前就做出决定。&lt;/p>
+&lt;p>举个例子，我经常在叫外卖的时候翻了半天 App 却不知道吃什么，有的时候能超过半个多小时都还没有下单，白白浪费时间。&lt;br>
+正确的做法是，快速的浏览有没有特别什么想吃的，如果没有就不要纠结，直接选一个之前吃过的店快速下单，这至少保证不会有多难吃，早点下完单就可以去干别的事情。&lt;br>
+同样的情况也会发生在逛淘宝的时候，买一些金额不那么大的商品的时候，不要比来比去，到手如果不好大不了退货，不要花大量时间在看评价，看价格的各种纠结。&lt;/p>
+&lt;p>相反的，什么时候应该多“纠结”呢？比如当在外租房需要搬家的时候，应该多看多比较，这个时候不要怕麻烦，因为搬一次家的成本是很大的，既要花费时间，也要花费精力。&lt;/p>
+&lt;p>&lt;strong>当需要买房的时候，更应该谨慎，因为大多数人会为此背负三十年的贷款。&lt;/strong>&lt;br>
+记得当初 2019 年买房子的时候根本没有太多的思考，觉得那么多人抢肯定好，导致现在眼睁睁看着房价一天天往下跌。&lt;br>
+当然这也跟当时的认知有关，谁也不知道过了 2021 年之后，经济发展会降速到这个程度，现在人的认知就是“大不了不买房，躺平了”，所以说&lt;strong>你只能赚到你认知范围内的钱&lt;/strong>，同样的，&lt;strong>亏钱说明认知不到位。&lt;/strong>&lt;/p></description></item><item><title>Markdown 基本语法</title><link>https://skykoo.github.io/p/markdown-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</link><pubDate>Sat, 07 Oct 2023 14:22:08 +0800</pubDate><guid>https://skykoo.github.io/p/markdown-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</guid><description>&lt;blockquote>
+&lt;p>参考 &lt;a class="link" href="https://markdown.com.cn/" target="_blank" rel="noopener"
+>Markdown 教程&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h1 id="一级">一级&lt;/h1>
+&lt;h2 id="二级">二级&lt;/h2>
+&lt;h3 id="三级">三级&lt;/h3>
+&lt;h4 id="四级">四级&lt;/h4>
+&lt;h5 id="五级">五级&lt;/h5>
+&lt;p>正文!&lt;/p>
+&lt;p>&lt;code>代码块&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cpp" data-lang="cpp">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#include&lt;/span> &lt;span class="cpf">&amp;lt;iostream&amp;gt;&lt;/span>&lt;span class="cp">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">cout&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="s">&amp;#34;Hello World!&amp;#34;&lt;/span> &lt;span class="o">&amp;lt;&amp;lt;&lt;/span> &lt;span class="n">std&lt;/span>&lt;span class="o">::&lt;/span>&lt;span class="n">endl&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
