@@ -1,8 +1,8 @@
-+++
-title = '为什么要创建个人 Blog ？'
-date = 2023-10-18T08:50:22+08:00
-draft = false
-+++
+---
+title: "为什么要创建个人 Blog ？"
+date: 2023-10-18T08:50:22+08:00
+draft: false
+---
 其实很多年前就折腾过个人 Blog，当时是用流行的 Hexo 构建，但是后来完全没有写文章的欲望，也不知道要写啥，渐渐的就废弃掉了。  
 直到最近看到这篇文章[Every person on the planet should have their own website](https://eftegarie.com/every-person-on-the-planet-should-have-their-own-website)，决定重启个人 blog。  
 有必要分享一下这篇短文：

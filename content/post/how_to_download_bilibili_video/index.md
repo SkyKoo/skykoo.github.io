@@ -1,8 +1,8 @@
-+++
-title = '怎样下载 Bilibili 视频？'
-date = 2023-11-04T14:25:58+08:00
-draft = false
-+++
+---
+title: "怎样下载 Bilibili 视频？"
+date: 2023-11-04T14:25:58+08:00
+draft: false
+---
 
 # 第一步：安装 Bilibili Macos 客户端
 在设置页面可以找到下载设置，缓存目录，设置好这个目录，并找到想要下载的视频，缓存下来。

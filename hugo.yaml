@@ -5,9 +5,8 @@ baseURL: https://skykoo.github.io/
 languageCode: zh-cn
 # Site title.
 # title: 天空
-title: sky's blog
+title: 鸣
 # theme
-# theme: PaperMod
 theme: hugo-theme-stack
 
 paginate: 5
@@ -21,27 +20,11 @@ enableRobotsTXT: true
 
 # Theme i18n support
 # Available values: ar, bn, ca, de, el, en, es, fr, hu, id, it, ja, ko, nl, pt-br, th, uk, zh-cn, zh-hk, zh-tw
-defaultContentLanguage: zh-cn
+# DefaultContentLanguage: zh-cn
 # defaultContentLanguage: en
 
 # 中日韩文字检测
-# hasCJKLanguage: true
-hasCJKLanguage: false
-
-languages:
-    en:
-        languageName: English
-        title: Sky's Blog
-        weight: 1
-          # params:
-          # description: Example description
-    zh-cn:
-        languageName: 中文
-        title: 鸣
-        weight: 2
-          # params:
-          # description: 演示说明
-
+hasCJKLanguage: true
 
 permalinks:
     post: /p/:slug/
@@ -52,7 +35,7 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon:  # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
+    favicon: # e.g.: favicon placed in `static/favicon.ico` of your site folder, then set this field to `/favicon.ico` (`/` is necessary)
 
     footer:
         since: 2020
