@@ -4,6 +4,8 @@ date = 2023-12-05T13:48:12+08:00
 draft = false
 +++
 
+{{< bilibili BV1UM411R78H 0 >}}
+
 Well no doubt many of you are wondering why the speaker is so old, well the answer is obviously he hasn’t died yet. And why was the speaker chosen? Well I don’t know that either. I like to think that the development department had nothing to do with it.
 
 你们当中肯定有许多人会觉得奇怪：这么老还能来演讲。嗯，答案很明显：他还没有死。为什么要请这个人来演讲呢？我也不知道，我希望学校的发展部跟这没什么关系。
